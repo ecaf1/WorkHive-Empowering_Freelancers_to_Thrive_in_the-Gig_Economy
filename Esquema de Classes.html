@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Esquema de Classes para Site Freelancer</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light text-center">
+    <div class="container my-4">
+        <h1 class="text-primary">Esquema de Classes</h1>
+        <div class="row">
+            <!-- Classe Usuário -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Usuário</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>nome</li>
+                            <li>email</li>
+                            <li>senha</li>
+                            <li>perfil (Cliente ou Freelancer)</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>login()</li>
+                            <li>logout()</li>
+                            <li>atualizar_perfil()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Anúncio -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Anúncio</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>titulo</li>
+                            <li>descricao</li>
+                            <li>orçamento</li>
+                            <li>cliente (referência ao Cliente)</li>
+                            <li>propostas (lista de Propostas)</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>criar_proposta()</li>
+                            <li>remover_proposta()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Proposta -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Proposta</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>freelancer (referência ao Freelancer)</li>
+                            <li>anuncio (referência ao Anuncio)</li>
+                            <li>valor</li>
+                            <li>mensagem</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>aceitar()</li>
+                            <li>rejeitar()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Favoritos -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Favoritos</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>usuario (referência ao Usuario)</li>
+                            <li>anuncios_favoritos (lista de Anuncios)</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>adicionar_anuncio()</li>
+                            <li>remover_anuncio()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Comentário -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Comentário</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>usuario (referência ao Usuario)</li>
+                            <li>texto</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>editar()</li>
+                            <li>deletar()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Notificação -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Notificação</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>usuario (referência ao Usuario)</li>
+                            <li>mensagem</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>marcar_como_lida()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Avaliação -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Avaliação</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>usuario (referência ao Usuário)</li>
+                            <li>anuncio (referência ao Anúncio)</li>
+                            <li>classificação</li>
+                            <li>comentário</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>criar_avaliacao()</li>
+                            <li>editar_avaliacao()</li>
+                            <li>deletar_avaliacao()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Chat -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Chat</div>
+                    <div class="card-body">
+                        <h3>Atributos:</h3>
+                        <ul>
+                            <li>id</li>
+                            <li>emissor (referência ao Usuário)</li>
+                            <li>receptor (referência ao Usuário)</li>
+                            <li>mensagem</li>
+                        </ul>
+                        <h3>Métodos:</h3>
+                        <ul>
+                            <li>enviar_mensagem()</li>
+                            <li>deletar_mensagem()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

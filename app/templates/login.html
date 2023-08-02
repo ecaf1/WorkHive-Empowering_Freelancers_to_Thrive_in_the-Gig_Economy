@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Adicionando CSS personalizado -->
+    <style>
+        body, html {
+            height: 100%;
+            background-color: #212121; /* Fundo preto */
+        }
+
+        .full-height {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            color: #ffffff; /* Texto branco */
+            background-color: #424242; /* Fundo do painel cinza escuro */
+            width: 100%; /* Faz o painel responsivo */
+        }
+
+        .btn-orange {
+            background-color: orange;
+            color: #212121; /* Cor do texto preta */
+        }
+
+        .text-orange {
+            color: orange;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <h4 class="text-orange" style="font-size: 40px;">WORKHIVE</h4>
+        </div>
+        <div class="row justify-content-center">
+    <div class="full-height">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3"> <!-- Tornar a tela mais responsiva -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="text-center">Login</h4>
+                        <form action="{{ url_for('login') }}" method="POST">
+                            <div class="form-group">
+                                <label for="email">E-mail Cadastrado</label>
+                                <input type="text" class="form-control" name="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Senha</label>
+                                <input type="password" class="form-control" name="password" id="password">
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-orange waves-effect waves-dark" type="submit" name="action">Sign in</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <a class="btn btn-orange waves-effect waves-dark" href="{{ url_for('create_account') }}">Sign Up</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

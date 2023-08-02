@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Adicionando CSS personalizado -->
+    <style>
+        body, html {
+            height: 100%;
+            background-color: #212121; /* Fundo escuro */
+        }
+
+        .full-height {
+            height: 80vh; /* altura em função da altura da janela de visualização */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-panel {
+            color: #ffffff; /* Texto branco */
+            background-color: #424242; /* Fundo do painel cinza escuro */
+            width: 100%; /* Faz o painel do cartão responsivo */
+        }
+
+        .btn {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="full-height">
+        <div class="row">
+            <h4 class="center-align" style="color: red; font-size: 40px;">WORKHIVE</h4>
+            <div class="col s12 m10 l8 xl6 offset-m1 offset-l2 offset-xl3"> <!-- Tornar a tela mais responsiva -->
+                <div class="card-panel">
+                    <h4 class="center-align">Cadastro de Usuário</h4>
+                    <form action="/register" method="POST">
+                        <div class="input-field">
+                            <input type="text" name="name" id="name">
+                            <label for="name">Nome</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="email" name="email" id="email">
+                            <label for="email">E-mail</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" name="password" id="password">
+                            <label for="password">Senha</label>
+                        </div>
+                        <div class="center-align">
+                            <button class="btn waves-effect waves-dark" type="submit" name="action">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
