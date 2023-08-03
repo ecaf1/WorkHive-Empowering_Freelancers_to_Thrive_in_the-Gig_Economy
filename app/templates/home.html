@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
@@ -30,13 +31,14 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-small">
         <a href="#" class="navbar-brand orange-text">WORKHIVE</a>
+        <span class="navbar-text text-white">Bem-vindo, {{ username }}</span> <!-- Adicionando a saudação -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link orange-text">Menu 1</a>
+                    <a href="{{url_for('home')}}" class="nav-link orange-text"><i class="fa fa-home"></i> Home</a> <!-- Ícone de casa adicionado aqui -->
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link orange-text">Menu 2</a>

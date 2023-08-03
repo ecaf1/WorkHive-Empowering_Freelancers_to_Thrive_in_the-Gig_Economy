@@ -1,14 +1,26 @@
 import sqlite3
 
+# Tabela de Usuários
 def create_table():
     conn = sqlite3.connect('users.db')
     c = conn.cursor()
     c.execute('''
     CREATE TABLE IF NOT EXISTS users(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL
     )''')
+    # Tabela de Anúncos
+    c.execute('''
+    CREATE TABLE IF NOT EXISTS ads(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL,
+        category TEXT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
+    )''')
+    
     conn.commit()
     conn.close()
     
@@ -34,3 +46,18 @@ def get_user(username, password):
         return True
     else:
         return False
+    
+
+def add_ad(title, description, category):
+    conn = sqlite3.connect('users.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO ads (user_id, title, description, category) VALUES (?, ?, ?, ?)", (1, title, description, category))
+    conn.commit()
+    conn.close()
+
+def edit_ad():
+    pass
+
+def delete_ad():
+    pass
+
