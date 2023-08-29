@@ -2,12 +2,13 @@ import sqlite3
 
 # Tabela de Usuários
 def create_table():
-    conn = sqlite3.connect('users.db')
+    conn = sqlite3.connect('dateBase.db')
     c = conn.cursor()
     c.execute('''
     CREATE TABLE IF NOT EXISTS users(
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL UNIQUE,
+        username TEXT NOT NULL ,
+        email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL
     )''')
     # Tabela de Anúncos
@@ -24,11 +25,11 @@ def create_table():
     conn.commit()
     conn.close()
     
-def add_user(username, password):
-    conn = sqlite3.connect('users.db')
+def add_user(username, email, password):
+    conn = sqlite3.connect('dataBase.db')
     c = conn.cursor()
     try:
-        c.execute("INSERT INTO users (username, password) VALUES (?, ?)",(username, password))
+        c.execute("INSERT INTO users (username,email, password) VALUES (?, ?, ?)",(username,email, password))
         conn.commit()
         return True
     except sqlite3.IntegrityError:
@@ -37,7 +38,7 @@ def add_user(username, password):
         conn.close()
         
 def get_user(username, password):
-    conn = sqlite3.connect("users.db")
+    conn = sqlite3.connect("dataBase.db")
     c = conn.cursor()
     c.execute("SELECT password FROM users WHERE username = ?", (username,))
     stored_password = c.fetchone()
@@ -49,7 +50,7 @@ def get_user(username, password):
     
 
 def add_ad(title, description, category):
-    conn = sqlite3.connect('users.db')
+    conn = sqlite3.connect('dataBase.db')
     c = conn.cursor()
     c.execute("INSERT INTO ads (user_id, title, description, category) VALUES (?, ?, ?, ?)", (1, title, description, category))
     conn.commit()

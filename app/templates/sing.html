@@ -36,7 +36,7 @@
             <div class="col s12 m10 l8 xl6 offset-m1 offset-l2 offset-xl3"> <!-- Tornar a tela mais responsiva -->
                 <div class="card-panel">
                     <h4 class="center-align">Cadastro de Usuário</h4>
-                    <form action="/register" method="POST">
+                    <form action="/create_account" method="post">
                         <div class="input-field">
                             <input type="text" name="name" id="name">
                             <label for="name">Nome</label>
@@ -52,7 +52,10 @@
                         <div class="center-align">
                             <button class="btn waves-effect waves-dark" type="submit" name="action">Cadastrar</button>
                         </div>
-                    </form>
+                        {% if error %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endif %}
+                    </form>                    
                 </div>
             </div>
         </div>

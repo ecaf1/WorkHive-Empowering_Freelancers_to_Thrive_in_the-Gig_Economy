@@ -32,16 +32,17 @@ def home():
 
 @app.route('/create_account',  methods = ['GET', 'POST'])
 def create_account():
+    error = None
     if request.method == "POST":
-        name = request.form[name]
-        email = request.form[email]
-        password = request.form[password]
-        conn = sqlite3.connect('users.sqlite')
-        c = conn.cursor()
-        c.execute('INSERT INTO user  (name, email, password) VALUES (?,?,?)', (name, email, password))
-        conn.commit()
-        conn.close()
-    return render_template('sing.html')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        if not name or not email or not password:
+            error = 'Todos os campos devem ser preenchidos!'
+        else:
+            add_user(name, email, password)
+            return(redirect(url_for('login')))
+    return render_template('sing.html', error=error)
 
 
 @app.route('/create_ad', methods = ['GET', 'POST'])
