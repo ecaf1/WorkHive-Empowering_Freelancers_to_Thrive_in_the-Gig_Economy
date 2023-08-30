@@ -20,11 +20,11 @@
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
         }
-        .footer-fixed {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 150px; /* Defina a altura desejada aqui */
+        footer {
+            margin-top: auto;
+        }
+        .red-heart {
+            color: red;
         }
     </style>
 </head>
@@ -38,13 +38,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{url_for('home')}}" class="nav-link orange-text"><i class="fa fa-home"></i> Home</a> <!-- Ícone de casa adicionado aqui -->
+                    <a href="{{url_for('home')}}" class="nav-link orange-text"><i class="fa fa-home"></i> </a> <!-- Ícone de casa adicionado aqui -->
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link orange-text">Menu 2</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle orange-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Notificações
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notificationDropdown">
+                        <!-- Conteúdo gerado pelo JavaScript aqui -->
+                    </div>
                 </li>
+                <script>
+                    var notifications = {{ notifications|map(attribute='texto')|list|tojson|safe }};
+                    console.log(notifications);
+                </script>
                 <li class="nav-item">
                     <a href="{{ url_for('create_ad')}}" class="nav-link orange-text">Criar Anúncio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link orange-text">Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link orange-text">Editar Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('login')}}" class="nav-link orange-text">Sair</a>
                 </li>
             </ul>
         </div>
@@ -53,23 +71,121 @@
         <div class="section no-pad-bot" id="index-banner">
             <div class="container">
                 <h1 class="header text-center orange-text">Bem vindo à nossa home page!</h1>
-                <div class="row text-center">
-                    <h5 class="header col-12 light orange-text">Um texto descritivo pode ser colocado aqui.</h5>
-                </div>
             </div>
         </div>
-    </main>
-    <footer class="page-footer bg-dark text-white footer-fixed">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-6 col-sm-12">
-                    <h5>Footer Content</h5>
-                    <p class="text-light">Você pode usar este espaço para colocar texto ou links.</p>
+              {% for ad in ads %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ad.title }}</h5>
+                        <p class="card-text">{{ ad.description }}</p>
+                        <p class="card-text">{{ ad.value }}</p>
+                        <p class="card-text">{{ ad.category }}</p>
+                        <a href="#" class="btn btn-primary detail-button" data-ad-id="{{ ad.id }}">Mais detalhes</a>
+                        <a href="#" class="btn btn-outline-danger float-right heart-button" data-ad-id="{{ ad.id }}">
+                            <i class="fas fa-heart"></i>
+                        </a>
+                    </div>
+                  </div>
                 </div>
+              {% endfor %}
+            </div>
+            <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalTitle"></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="modalBody">
+                      <!-- Detalhes do anúncio aqui -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+          </div>
+    </main>
+    <footer class="bg-dark text-white footer-fixed ">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            <h5>Desenvolvido por Edeilson Costa</h5>
+            <p>Alguma mensagem adicional aqui.</p>
+            </div>
+            <div class="col-md-4">
+            <h5>Links Úteis</h5>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Link 1</a></li>
+                <li><a href="#" class="text-white">Link 2</a></li>
+            </ul>
+            </div>
+            <div class="col-md-4 text-right">
+            <h5>Conecte-se</h5>
+            <a href="https://github.com/seu_usuario" target="_blank"><i class="fab fa-github fa-2x"></i></a>
+            <a href="https://linkedin.com/in/seu_usuario" target="_blank" style="margin-left: 20px;"><i class="fab fa-linkedin fa-2x"></i></a>
             </div>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        </div>
+    </footer>      
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".heart-button").click(function() {
+              $(this).find("i").toggleClass("text-danger");
+            });
+          
+            $(".detail-button").click(function() {
+              var adId = $(this).data("ad-id");
+              
+              // Supondo que você tenha todas as informações do anúncio em um objeto.
+              // Recomendo buscar estas informações via AJAX.
+              var adDetails = {
+                title: "Título do anúncio", 
+                description: "Descrição aqui", 
+                value: "Valor aqui", 
+                category: "Categoria aqui"
+              };
+              
+              $('#modalTitle').text(adDetails.title);
+              $('#modalBody').html(`
+                <p><strong>Descrição:</strong> ${adDetails.description}</p>
+                <p><strong>Valor:</strong> ${adDetails.value}</p>
+                <p><strong>Categoria:</strong> ${adDetails.category}</p>
+              `);
+          
+              $('#detailsModal').modal('show');
+            });
+            var dropdownContent = "";
+            notifications.forEach(function(notification) {
+                dropdownContent += '<a class="dropdown-item">' + notification + '</a>';
+            });
+            $("#notificationDropdown").html(dropdownContent);
+
+            $(document).ready(function() {
+                $('.heart-button').click(function() {
+                  const adId = $(this).attr('data-ad-id');
+                  const userId = {{ current_user}}; // assumindo que você tem um objeto current_user
+              
+                  // Chame a API para salvar o favorito
+                  $.post("/add_favorite", { user_id: userId, ad_id: adId }, function(data) {
+                    if (data.status === 'success') {
+                      // Mude a cor do coração
+                      $(this).find('i.fas.fa-heart').toggleClass('red-heart');
+                    }
+                  });
+                });
+              });
+});
+          
+      </script>
 </body>
 </html>

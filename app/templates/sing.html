@@ -12,7 +12,7 @@
         }
 
         .full-height {
-            height: 80vh; /* altura em função da altura da janela de visualização */
+            height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,19 +21,24 @@
         .card-panel {
             color: #ffffff; /* Texto branco */
             background-color: #424242; /* Fundo do painel cinza escuro */
-            width: 100%; /* Faz o painel do cartão responsivo */
+            width: 100%; /* Faz o painel responsivo */
         }
 
         .btn {
-            background-color: red;
+            background-color: orange; /* Cor do botão */
+            color: #212121; /* Texto preto */
+        }
+
+        h4.center-align {
+            color: orange; /* Texto laranja para combinar */
         }
     </style>
 </head>
 <body>
     <div class="full-height">
         <div class="row">
-            <h4 class="center-align" style="color: red; font-size: 40px;">WORKHIVE</h4>
-            <div class="col s12 m10 l8 xl6 offset-m1 offset-l2 offset-xl3"> <!-- Tornar a tela mais responsiva -->
+            <h4 class="center-align">WORKHIVE</h4>
+            <div class="col s12 m10 l8 xl6 offset-m1 offset-l2 offset-xl3">
                 <div class="card-panel">
                     <h4 class="center-align">Cadastro de Usuário</h4>
                     <form action="/create_account" method="post">
@@ -60,7 +65,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
